@@ -5,6 +5,12 @@ import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
 export default defineConfig({
   plugins: [react()],
+  optimizeDeps: {
+    include: ['@tanstack/react-query'],
+    esbuildOptions: {
+      target: 'es2020',
+    },
+  },
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "client", "src"),
@@ -16,14 +22,20 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
+    target: 'es2020',
     commonjsOptions: {
       transformMixedEsModules: true,
     },
     rollupOptions: {
+      external: [],
       output: {
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom'],
-          'query': ['@tanstack/react-query']
+        manualChunks: (id) => {
+          if (id.includes('node_modules')) {
+            if (id.includes('@tanstack/react-query')) {
+              return 'vendor_query';
+            }
+            return 'vendor';
+          }
         }
       }
     }
