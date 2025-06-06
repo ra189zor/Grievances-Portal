@@ -12,15 +12,5 @@
       "destination": "/"
     }
   ],
-  "builds": [
-    {
-      "src": "dist/**/*",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "dist/index.js",
-      "use": "@vercel/node"
-    }
-  ],
   "framework": "vite"
 }
