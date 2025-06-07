@@ -9,6 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { authApi, type LoginCredentials } from "@/lib/auth";
 import { Heart, User, Lock } from "lucide-react";
 import backgroundImage from "@assets/Wallpaper Cantik Iphone_1749120990697.jpeg";
+import { API_BASE_URL } from "@/lib/config";
 
 interface LoginPageProps {
   onLogin: (user: any) => void;
@@ -92,6 +93,7 @@ export default function LoginPage({ onLogin }: LoginPageProps) {
                 onChange={(e) => setCredentials(prev => ({ ...prev, username: e.target.value }))}
                 placeholder="Enter your username"
                 className="rounded-2xl border-2 border-primary/30 bg-white/70 focus:border-primary text-foreground font-medium"
+                autoComplete="username"
                 required
               />
             </div>
@@ -108,6 +110,7 @@ export default function LoginPage({ onLogin }: LoginPageProps) {
                 onChange={(e) => setCredentials(prev => ({ ...prev, password: e.target.value }))}
                 placeholder="Enter your password"
                 className="rounded-2xl border-2 border-primary/30 bg-white/70 focus:border-primary text-foreground font-medium"
+                autoComplete="current-password"
                 required
               />
             </div>
